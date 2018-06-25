@@ -53,9 +53,7 @@ Output: 21
         if res>2**31-1:
             return 0
         return res if not n else -res
-`Note: 
-
-重点是y=y*10+x%10;x//=10。可将x依次倒置放入Y。2**31-1=2^31-1是int的最大限界`
+### Note: </br>重点是y=y*10+x%10;x//=10。可将x依次倒置放入Y。2**31-1=2^31-1是int的最大限界
 
 
 
@@ -83,9 +81,7 @@ Explanation: Reads 01 from right to left. Therefore it is not a palindrome.
               s=str(x)
               n=s[::-1]
               return n==s
-`Note:
-
-n是从后往前取值`
+### Note:</br>n是从后往前取值
               
 ## 13. Roman to Integer</br>`罗马到数字`
 > For example, two is written as II in Roman numeral, just two one's added together. Twelve is written as, XII, which is simply X + II. The number twenty seven is written as XXVII, which is XX + V + II.
@@ -124,9 +120,7 @@ M             1000</br>
         return integer
         
         
-`Note:
-
-字典`     
+### Note:</br>字典     
 ## 14. Longest Common Prefix`最长公共前缀`
 > Write a function to find the longest common prefix string amongst an array of strings.
 
@@ -159,9 +153,7 @@ Explanation: There is no common prefix among the input strings.
         return first[:i]
         
         
-`Note:
-
-重点是sort（），如果有公共前缀，排序之后可按公共字幕排序，则可拿出相同字符`          
+### Note:</br>重点是sort（），如果有公共前缀，排序之后可按公共字幕排序，则可拿出相同字符         
 ## 167. Two Sum II - Input array is sorted</br>
 > Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number.</br>The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2.</b>Note:</br>Your returned answers (both index1 and index2) are not zero-based.</br>You may assume that each input would have exactly one solution and you may not use the same element twice.</br>
 >> Example:
@@ -189,6 +181,4 @@ Explanation: The sum of 2 and 7 is 9. Therefore index1 = 1, index2 = 2.</br>
         return None
 
 
-`Note:
-
-设置前后两个哨兵`  
+### Note:</br>设置前后两个哨兵
