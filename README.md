@@ -153,7 +153,54 @@ Explanation: There is no common prefix among the input strings.
         return first[:i]
         
         
-### Note:</br>重点是sort（），如果有公共前缀，排序之后可按公共字幕排序，则可拿出相同字符         
+### Note:</br>重点是sort（），如果有公共前缀，排序之后可按公共字幕排序，则可拿出相同字符 
+
+## 20. Valid Parentheses `有效括号`
+> Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+
+An input string is valid if:
+
+Open brackets must be closed by the same type of brackets.
+Open brackets must be closed in the correct order.
+>> Example 1:
+
+Input: "()"
+Output: true
+Example 2:
+
+Input: "()[]{}"
+Output: true
+Example 3:
+
+Input: "(]"
+Output: false
+Example 4:
+
+Input: "([)]"
+Output: false
+Example 5:
+
+Input: "{[]}"
+Output: true
+
+       class Solution:
+    def isValid(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        str=[]
+        match={'(':')','{':'}','[':']'}
+        for i in s:
+            if i in match:
+                str.append(i)
+            else:
+                if not str or match[str.pop()]!=i:
+                    return False
+        return not str
+
+### Note:</br>利用栈遍历S将括号放入str，没有str返回F。match[str.pop()]即为此括号的另一半（pop出的值在字典中Value为另一半）
+
 ## 167. Two Sum II - Input array is sorted</br>
 > Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number.</br>The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2.</b>Note:</br>Your returned answers (both index1 and index2) are not zero-based.</br>You may assume that each input would have exactly one solution and you may not use the same element twice.</br>
 >> Example:
