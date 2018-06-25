@@ -23,7 +23,7 @@ return [0, 1].
                     if i !=k:
                         return [i,k]
                         
-## 7. Reverse Integer</br><p style='color:red'>倒置数</p>
+## 7. Reverse Integer</br> `倒置数`
 > Given a 32-bit signed integer, reverse digits of an integer.
 >> Example 1:
 
@@ -53,11 +53,11 @@ Output: 21
         if res>2**31-1:
             return 0
         return res if not n else -res
-```diff
-+<p style='color:red'>Note:</br>重点是y=y*10+x%10;x//=10。可将x依次倒置放入Y。2**31-1=2^31-1是int的最大限界</p>
+`Note:</br>重点是y=y*10+x%10;x//=10。可将x依次倒置放入Y。2**31-1=2^31-1是int的最大限界`
 
 
-## 9. Palindrome Number<p style='color:red'>回文数</p>
+
+## 9. Palindrome Number`回文数`
 > Determine whether an integer is a palindrome. An integer is a palindrome when it reads the same backward as forward.
 >> Input: 121
 Output: true
@@ -81,8 +81,9 @@ Explanation: Reads 01 from right to left. Therefore it is not a palindrome.
               s=str(x)
               n=s[::-1]
               return n==s
+`Note:</br>n是从后往前取值`
               
-## 13. Roman to Integer</br>
+## 13. Roman to Integer</br>`罗马到数字`
 > For example, two is written as II in Roman numeral, just two one's added together. Twelve is written as, XII, which is simply X + II. The number twenty seven is written as XXVII, which is XX + V + II.
 
 Roman numerals are usually written largest to smallest from left to right. However, the numeral for four is not IIII. Instead, the number four is written as IV. Because the one is before the five we subtract it making four. The same principle applies to the number nine, which is written as IX. There are six instances where subtraction is used:
@@ -118,7 +119,9 @@ M             1000</br>
                 i+=1
         return integer
         
-## 14. Longest Common Prefix
+        
+`Note:</br>字典`     
+## 14. Longest Common Prefix`最长公共前缀`
 > Write a function to find the longest common prefix string amongst an array of strings.
 
 If there is no common prefix, return an empty string "".
@@ -149,6 +152,8 @@ Explanation: There is no common prefix among the input strings.
             i+=1
         return first[:i]
         
+        
+`Note:</br>重点是sort（），如果有公共前缀，排序之后可按公共字幕排序，则可拿出相同字符`          
 ## 167. Two Sum II - Input array is sorted</br>
 > Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number.</br>The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2.</b>Note:</br>Your returned answers (both index1 and index2) are not zero-based.</br>You may assume that each input would have exactly one solution and you may not use the same element twice.</br>
 >> Example:
@@ -174,3 +179,6 @@ Explanation: The sum of 2 and 7 is 9. Therefore index1 = 1, index2 = 2.</br>
             else:
                 i += 1
         return None
+
+
+`Note:</br>设置前后两个哨兵`  
