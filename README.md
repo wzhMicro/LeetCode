@@ -53,7 +53,10 @@ Output: 21
         if res>2**31-1:
             return 0
         return res if not n else -res
-<p style='color:red'>Note:</br>重点是y=y*10+x%10;x//=10。可将x依次倒置放入Y。2**31-1=2^31-1是int的最大限界</p>
+```diff
++<p style='color:red'>Note:</br>重点是y=y*10+x%10;x//=10。可将x依次倒置放入Y。2**31-1=2^31-1是int的最大限界</p>
+
+
 ## 9. Palindrome Number<p style='color:red'>回文数</p>
 > Determine whether an integer is a palindrome. An integer is a palindrome when it reads the same backward as forward.
 >> Input: 121
