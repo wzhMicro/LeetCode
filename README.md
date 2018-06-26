@@ -201,6 +201,140 @@ Output: true
 
 ### Note:</br>利用栈遍历S将括号放入str(如果在match中有)，最后弹出S，作比较，如果身体乳不为空返回F。match[str.pop()]即为此括号的另一半（pop出的值在字典中Value为另一半）
 
+## 21. Merge Two Sorted Lists
+> Merge two sorted linked lists and return it as a new list. The new list should be made by splicing together the nodes of the first two lists.
+
+>> Example:
+
+Input: 1->2->4, 1->3->4
+Output: 1->1->2->3->4->4
+
+               prev=dummy=ListNode(None)
+        while l1 and l2:
+            if l1.val<l2.val:
+                prev.next=l1
+                l1=l1.next
+            else:
+                prev.next=l2
+                l2=l2.next
+            prev=prev.next
+
+        prev.next=l1 or l2
+        return dummy.next
+        
+## 26. Remove Duplicates from Sorted Array
+> Given a sorted array nums, remove the duplicates in-place such that each element appear only once and return the new length.
+
+Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
+>> Example 1:
+
+Given nums = [1,1,2],
+
+Your function should return length = 2, with the first two elements of nums being 1 and 2 respectively.
+
+It doesn't matter what you leave beyond the returned length.
+Example 2:
+
+Given nums = [0,0,1,1,1,2,2,3,3,4],
+
+Your function should return length = 5, with the first five elements of nums being modified to 0, 1, 2, 3, and 4 respectively.
+
+It doesn't matter what values are set beyond the returned length.
+
+       n=0
+       for i in range(len(nums)):
+              if i==0 or nums[i]!=nums[i-1]:
+                     nums[n]=nums[i]
+                     n+=1
+       return n
+       
+###返回类型和输入类型。！！ 第一个数肯定是不重复的，后一个数和之前不一样则将第N个变为那个数，同时N++。通过索引迭代List和string的元素要用range。注意返回的len不是这个列表。
+
+
+##27. Remove Element
+>Given an array nums and a value val, remove all instances of that value in-place and return the new length.
+
+Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
+
+The order of elements can be changed. It doesn't matter what you leave beyond the new length.
+>> Example 1:
+
+Given nums = [3,2,2,3], val = 3,
+
+Your function should return length = 2, with the first two elements of nums being 2.
+
+It doesn't matter what you leave beyond the returned length.
+Example 2:
+
+Given nums = [0,1,2,2,3,0,4,2], val = 2,
+
+Your function should return length = 5, with the first five elements of nums containing 0, 1, 3, 0, and 4.
+
+Note that the order of those five elements can be arbitrary.
+
+It doesn't matter what values are set beyond the returned length.
+
+               n=0
+        for i in range(len(nums)):
+            if nums[i]!=val:
+                nums[n]=nums[i]
+                n+=1
+        return n
+### 和26题相似
+
+## 28. Implement strStr()
+> Implement strStr().
+
+Return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+>> Example 1:
+
+Input: haystack = "hello", needle = "ll"
+Output: 2
+Example 2:
+
+Input: haystack = "aaaaa", needle = "bba"
+Output: -1
+
+          return haystack.find(needle)
+          
+### 神奇，python的魅力还可以这样写，一行搞定
+
+## 35. Search Insert Position
+> Given a sorted array and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.
+
+You may assume no duplicates in the array.
+>> Example 1:
+
+Input: [1,3,5,6], 5
+Output: 2
+Example 2:
+
+Input: [1,3,5,6], 2
+Output: 1
+Example 3:
+
+Input: [1,3,5,6], 7
+Output: 4
+Example 4:
+
+Input: [1,3,5,6], 0
+Output: 0
+       
+        left=0
+        right=len(nums)
+        while left<=right and left<len(nums) and right>=0:
+            mid=(left+right)//2
+            if target==nums[mid]:
+                return mid
+            if target <nums[mid]:
+                right=mid-1
+            else:
+                left=mid+1
+        return left
+        
+### 类似排序第二种方法：
+       num=[i for i in nums if i<target]
+        return len(num)
 ## 167. Two Sum II - Input array is sorted</br>
 > Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number.</br>The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2.</b>Note:</br>Your returned answers (both index1 and index2) are not zero-based.</br>You may assume that each input would have exactly one solution and you may not use the same element twice.</br>
 >> Example:
