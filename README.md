@@ -199,7 +199,7 @@ Output: true
                     return False
         return not str
 
-### Note:</br>利用栈遍历S将括号放入str，没有str返回F。match[str.pop()]即为此括号的另一半（pop出的值在字典中Value为另一半）
+### Note:</br>利用栈遍历S将括号放入str(如果在match中有)，最后弹出S，作比较，如果身体乳不为空返回F。match[str.pop()]即为此括号的另一半（pop出的值在字典中Value为另一半）
 
 ## 167. Two Sum II - Input array is sorted</br>
 > Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number.</br>The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2.</b>Note:</br>Your returned answers (both index1 and index2) are not zero-based.</br>You may assume that each input would have exactly one solution and you may not use the same element twice.</br>
