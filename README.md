@@ -1,4 +1,4 @@
-# LeetCode
+# LeetCode 学习笔记</br>从easy到Mid到Hard。每日不定更新
 
 ## 1. Two Sum</br>
 > Given an array of integers, return indices of the two numbers such that they add up to a specific target.You may assume that each input would have exactly one solution, and you may not use the same element twice.
