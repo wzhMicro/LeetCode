@@ -385,7 +385,7 @@ Output: "1211"
 Input: [-2,1,-3,4,-1,2,1,-5,4],
 Output: 6
 Explanation: [4,-1,2,1] has the largest sum = 6.
->> 输出一组数中连续的数字最大和。从第一个开始加 *num[-2,1,-3,4,-1,2,1,-5,4]</br>f[-2,1,-2,4,3,5,6,1,5]</br>主要判断条件：f[i]=f[i-1]>0?num[i]+f[i-1]:num[i].如果之前一个数小于0，这部加，从本身重新开始
+>> 输出一组数中连续的数字最大和。从第一个开始加 *num[-2,1,-3,4,-1,2,1,-5,4]</br>f[-2,1,-2,4,3,5,6,1,5]</br>主要判断条件：f[i]=f[i-1]>0?num[i]+f[i-1]:num[i].如果之前一个数小于0，不加，从本身重新开始
 
        for i in range(1,len(nums)):
               if num[i-1]>0:
@@ -393,6 +393,25 @@ Explanation: [4,-1,2,1] has the largest sum = 6.
               ##else不变不用写
        return max(nums)
 ###主要思想是要和前一个数相加或者放弃比较难想到
+
+## 58. Length of Last Word
+> Given a string s consists of upper/lower-case alphabets and empty space characters ' ', return the length of last word in the string.
+
+If the last word does not exist, return 0.
+>> Example:
+
+Input: "Hello World"
+Output: 5
+       
+        count=0
+        for i in range(len(s)-1,-1,-1):
+            if s[i]!=' ':
+                count+=1
+            elif count!=0 and s[i]==' ':
+                break
+        return count
+ ###遇到空格就停止。个人以为还可以用split（）[-1]。返回最后一项的长度。如果类似‘a ’,判断最后一项为空格，n+=1。直到！= ‘ ’。
+ 
 ## 167. Two Sum II - Input array is sorted</br>
 > Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number.</br>The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2.</b>Note:</br>Your returned answers (both index1 and index2) are not zero-based.</br>You may assume that each input would have exactly one solution and you may not use the same element twice.</br>
 >> Example:
