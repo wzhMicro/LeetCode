@@ -412,6 +412,57 @@ Output: 5
         return count
  ###遇到空格就停止。个人以为还可以用split（）[-1]。返回最后一项的长度。如果类似‘a ’,判断最后一项为空格，n+=1。直到！= ‘ ’。
  
+## 66. Plus One
+> Given a non-empty array of digits representing a non-negative integer, plus one to the integer.
+
+The digits are stored such that the most significant digit is at the head of the list, and each element in the array contain a single digit.
+
+You may assume the integer does not contain any leading zero, except the number 0 itself.
+>> Example 1:
+
+Input: [1,2,3]
+Output: [1,2,4]
+Explanation: The array represents the integer 123.
+Example 2:
+
+Input: [4,3,2,1]
+Output: [4,3,2,2]
+Explanation: The array represents the integer 4321.
+###开始我认为取出最后一项加一，可是想到【1，2，9，9】无法实现。所以分为3步，1.数字依次取出变成整数2.加一3.变为数组
+        
+        num=0
+        for i in range(len(digits)):
+            num+=digits[i]*10**(len(digits)-i-1)
+            
+        newnum=num+1
+        str=[]
+        while newnum>0:
+            str.append(newnum%10)
+            newnum//=10
+        str.reverse()
+        return str
+        
+## 67. Add Binary `2进制相加返回二进制`
+> Given two binary strings, return their sum (also a binary string).
+
+The input strings are both non-empty and contains only characters 1 or 0.
+>> Example 1:
+
+Input: a = "11", b = "1"
+Output: "100"
+Example 2:
+
+Input: a = "1010", b = "1011"
+Output: "10101"
+###这个方法感觉有些作弊，不过这是python
+       
+        i=int(a,2)
+        j=int(b,2)
+        n=i+j
+
+        return bin(n)[2:]
+        
+        
 ## 167. Two Sum II - Input array is sorted</br>
 > Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number.</br>The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2.</b>Note:</br>Your returned answers (both index1 and index2) are not zero-based.</br>You may assume that each input would have exactly one solution and you may not use the same element twice.</br>
 >> Example:
