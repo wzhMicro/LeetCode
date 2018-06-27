@@ -335,6 +335,64 @@ Output: 0
 ### 类似排序第二种方法：
        num=[i for i in nums if i<target]
         return len(num)
+        
+## 38. Count and Say
+> The count-and-say sequence is the sequence of integers with the first five terms as following:
+
+1.     1
+2.     11
+3.     21
+4.     1211
+5.     111221
+1 is read off as "one 1" or 11.
+11 is read off as "two 1s" or 21.
+21 is read off as "one 2, then one 1" or 1211.
+>>Example 1:
+
+Input: 1
+Output: "1"
+Example 2:
+
+Input: 4
+Output: "1211"
+>>其实就是对上一个数进行遍历统计有多少个“几”。思路就是进行遍历从第一个数开始，记录为j，如果下一个数相同，就计数+1，直到不相同，将j重新设置为最新的数字，最新的数字变为计数的count+num，并继续进行遍历，将count重新置为1.
+
+        if n==0:
+            return '0'
+        if n==1:
+            return '1'
+        curnum='11'
+        for _ in range(2,n):
+            oldnum=curnum
+            curnum=''
+            count=1
+            firstnum=oldnum[0]
+            for j in range(1,len(oldnum)):
+                if oldnum[j]==firstnum:
+                    count+=1
+                else: 
+                    curnum += str(count)+firstnum
+                    firstnum=oldnum[j]
+                    count=1
+            curnum += str(count)+firstnum
+        return curnum
+###注意count是int型，要变成str才可以相加
+
+## 53. Maximum Subarray
+> Given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.
+>> Example:
+
+Input: [-2,1,-3,4,-1,2,1,-5,4],
+Output: 6
+Explanation: [4,-1,2,1] has the largest sum = 6.
+>> 输出一组数中连续的数字最大和。从第一个开始加 *num[-2,1,-3,4,-1,2,1,-5,4]</br>f[-2,1,-2,4,3,5,6,1,5]</br>主要判断条件：f[i]=f[i-1]>0?num[i]+f[i-1]:num[i].如果之前一个数小于0，这部加，从本身重新开始
+
+       for i in range(1,len(nums)):
+              if num[i-1]>0:
+                     num[i]+=num[i-1]
+              ##else不变不用写
+       return max(nums)
+###主要思想是要和前一个数相加或者放弃比较难想到
 ## 167. Two Sum II - Input array is sorted</br>
 > Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number.</br>The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2.</b>Note:</br>Your returned answers (both index1 and index2) are not zero-based.</br>You may assume that each input would have exactly one solution and you may not use the same element twice.</br>
 >> Example:
