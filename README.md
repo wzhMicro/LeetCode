@@ -462,6 +462,160 @@ Output: "10101"
 
         return bin(n)[2:]
         
+## 69. Sqrt(x)
+> Implement int sqrt(int x).
+
+Compute and return the square root of x, where x is guaranteed to be a non-negative integer.
+
+Since the return type is an integer, the decimal digits are truncated and only the integer part of the result is returned.
+>> Example 1:
+
+Input: 4
+Output: 2
+Example 2:
+
+Input: 8
+Output: 2
+Explanation: The square root of 8 is 2.82842..., and since 
+             the decimal part is truncated, 2 is returned.
+
+        n=math.sqrt(x)
+        return int(n)
+或者不用import math也可以
+           
+           return int(x**0.5)
+           
+## 70. Climbing Stairs
+> You are climbing a stair case. It takes n steps to reach to the top.
+
+Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+
+Note: Given n will be a positive integer.
+>> Example 1:
+
+Input: 2
+Output: 2
+Explanation: There are two ways to climb to the top.
+1. 1 step + 1 step
+2. 2 steps
+Example 2:
+
+Input: 3
+Output: 3
+Explanation: There are three ways to climb to the top.
+1. 1 step + 1 step + 1 step
+2. 1 step + 2 steps
+3. 2 steps + 1 step
+
+        a=1
+        b=1
+        for _ in range(n):
+            a,b=b,a+b
+        return a
+      ###这是根据斐波那契做的。如果n = 1层，可以有[1] ,   f(1) = 1种方法
+
+如果n = 2层，可以有[1,1] ,[2],  f(2) =  2种方法
+
+如果n = 3层，可以有[1,1,1],[1,2],[2,1], f(3) = f(1) + f(2) = 3种方法。
+
+如果n = 4层，可以有[1,1,1,1],[1,2,1],[1,1,2],[2,1,1],[2,2] , f(5)  = f(4) + f(3) = 5种方法。
+
+可以发现 f(n) = f(n-1) + f(n-2)</br>设S(n)表示走n级台阶的走法数量。走n级台阶，第一步只有两种选择：可以选择走1阶，然后还有S(n-1)种走法；选择走2阶，那么接下来有S(n-2)种走法。那么S(n) = S(n-1) + S(n-2)。
+
+
+自己的思路一直在如何算出每层台阶的不同走法数量。但重点应该放在数量的排序上，应简单列出几个简单的看排序。
+
+## 83. Remove Duplicates from Sorted List
+> Given a sorted linked list, delete all duplicates such that each element appear only once.
+>> Example 1:
+
+Input: 1->1->2
+Output: 1->2
+Example 2:
+
+Input: 1->1->2->3->3
+Output: 1->2->3
+
+### 最基本的删除操作，主要学习的是“摘链”的过程。所谓删除一个元素实际上是令这个节点的前一个元素直接指向这个节点的后一个元素（python特性是当一块内存无引用时，自动清空）。
+       prex=head
+        while prex and prex.next:
+            if prex.val==prex.next.val:
+                prex.next=prex.next.next
+            else:
+                prex=prex.next
+        return head
+## 88. Merge Sorted Array
+> Given two sorted integer arrays nums1 and nums2, merge nums2 into nums1 as one sorted array.
+
+Note:
+
+The number of elements initialized in nums1 and nums2 are m and n respectively.
+You may assume that nums1 has enough space (size that is greater or equal to m + n) to hold additional elements from nums2.
+>> Example:
+
+Input:
+nums1 = [1,2,3,0,0,0], m = 3
+nums2 = [2,5,6],       n = 3
+
+Output: [1,2,2,3,5,6]
+       
+         i,j,k=m-1,n-1,m+n-1 ##i,j,k为数组中元素的位置，倒着取
+        while i>=0 and j>=0:
+            if nums1[i]>nums2[j]:
+                nums1[k]=nums1[i]
+                i-=1
+            else:
+                nums1[k]=nums2[j]
+                j-=1
+            k-=1
+    
+        if i<0:##如果从nums1中不取，则nums1就是nums2的n个项
+             nums1[:k+1]=nums2[:j+1]
+             
+ ###第二种方法比较简单：
+       
+       nums1[:m+n]=nums1[0:m]+nums2[0:n]
+       nums1.sort()
+
+## 100. Same Tree
+> Given two binary trees, write a function to check if they are the same or not.
+
+Two binary trees are considered the same if they are structurally identical and the nodes have the same value.
+>> Example 1:
+
+Input:     1         1
+          / \       / \
+         2   3     2   3
+
+        [1,2,3],   [1,2,3]
+
+Output: true
+Example 2:
+
+Input:     1         1
+          /           \
+         2             2
+
+        [1,2],     [1,null,2]
+
+Output: false
+Example 3:
+
+Input:     1         1
+          / \       / \
+         2   1     1   2
+
+        [1,2,1],   [1,1,2]
+
+Output: false
+
+        if not p and not q:
+            return True
+        if not p or not q:
+            return False
+        if p.val!=q.val:
+            return False
+        return self.isSameTree(p.left,q.left) and self.isSameTree(p.right,q.right)
         
 ## 167. Two Sum II - Input array is sorted</br>
 > Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number.</br>The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2.</b>Note:</br>Your returned answers (both index1 and index2) are not zero-based.</br>You may assume that each input would have exactly one solution and you may not use the same element twice.</br>
