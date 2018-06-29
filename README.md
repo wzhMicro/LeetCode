@@ -586,7 +586,6 @@ Two binary trees are considered the same if they are structurally identical and 
 Input:     1         1
           / \       / \
          2   3     2   3
-
         [1,2,3],   [1,2,3]
 
 Output: true
@@ -595,7 +594,6 @@ Example 2:
 Input:     1         1
           /           \
          2             2
-
         [1,2],     [1,null,2]
 
 Output: false
@@ -604,7 +602,6 @@ Example 3:
 Input:     1         1
           / \       / \
          2   1     1   2
-
         [1,2,1],   [1,1,2]
 
 Output: false
@@ -617,6 +614,156 @@ Output: false
             return False
         return self.isSameTree(p.left,q.left) and self.isSameTree(p.right,q.right)
         
+## 101. Symmetric Tree `对称树`
+> Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).
+>> For example, this binary tree [1,2,2,3,4,4,3] is symmetric:
+    1
+   / \
+  2   2
+ / \ / \
+3  4 4  3
+But the following [1,2,2,null,3,null,3] is not:
+    1
+   / \
+  2   2
+   \   \
+   3    3
+   
+### 其实就是把same tree相同树的return改了一下，相同树是左=左，右=右。对称树是左=右，右=左。只要稍作修改即可             
+        def isSymmetric(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        if not root:
+            return True
+        return self.mirror(root.left, root.right)
+    
+    def mirror(self, left, right):
+        if not left and not right:
+            return True
+        if not left or not right:
+            return False
+        if left.val != right.val:
+            return False
+        return self.mirror(left.right, right.left) and self.mirror(left.left, right.right)
+
+## 104. Maximum Depth of Binary Tree `二叉树最大深度`
+> Given a binary tree, find its maximum depth.
+
+The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
+
+Note: A leaf is a node with no children.
+>> Example:
+
+Given binary tree [3,9,20,null,null,15,7],
+    3
+   / \
+  9  20
+    /  \
+   15   7
+return its depth = 3.
+
+       def maxDepth(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        left=1 ##左右各有一个计数器
+        right=1
+        if not root:##到此为止
+            return 0
+        if root.left:
+            left=1+self.maxDepth(root.left)
+        if root.right:
+            right=1+self.maxDepth(root.right)
+        
+        return max(left,right)##返回一个最大值
+        
+## 107. Binary Tree Level Order Traversal II `二叉树遍历（从底部）`
+> Given a binary tree, return the bottom-up level order traversal of its nodes' values. (ie, from left to right, level by level from leaf to root).
+
+For example:
+>> Given binary tree [3,9,20,null,null,15,7],
+    3
+   / \
+  9  20
+    /  \
+   15   7
+return its bottom-up level order traversal as:
+
+[
+  [15,7],
+  [9,20],
+  [3]
+]
+        
+        def levelOrderBottom(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[List[int]]
+        """
+        str=[]
+        self.order(root,0,str)
+        return str[::-1]
+    
+    def order(self,node,depth,str):
+        if not node:
+            return #循环下面的if直到没有左右子树就返回输出
+        
+        if len(str)==depth:  #到达这一层后加入一个空的[]
+                str.append([])
+                
+        self.order(node.left,depth+1,str) #继续遍历左子树
+        str[depth].append(node.val) #插入根节点的值到str的第‘depth’个位置的[]
+        self.order(node.right,depth+1,str) #遍历右边
+            #先遍历左边再插入再遍历右边这样保证输入顺序
+       
+## 108. Convert Sorted Array to Binary Search Tree `数组变二叉查找树`
+> Given an array where elements are sorted in ascending order, convert it to a height balanced BST.
+
+For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1.
+>> Example:
+
+Given the sorted array: [-10,-3,0,5,9],
+
+One possible answer is: [0,-3,9,-10,null,5], which represents the following height balanced BST:
+      0
+     / \
+   -3   9
+   /   /
+ -10  5
+ 
+## 108. Convert Sorted Array to Binary Search Tree
+> Given an array where elements are sorted in ascending order, convert it to a height balanced BST.
+
+For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1.
+>> Example:
+
+Given the sorted array: [-10,-3,0,5,9],
+
+One possible answer is: [0,-3,9,-10,null,5], which represents the following height balanced BST:
+      0
+     / \
+   -3   9
+   /   /
+ -10  5
+       ###从中间切开，从右往左，
+       def sortedArrayToBST(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: TreeNode
+        """
+        return self.convert(nums,0,len(nums)-1)
+    
+    def convert(self,nums,left,right):
+        if left > right:
+            return None
+        mid=(left+right)//2
+        root=TreeNode(nums[mid])
+        root.left= self.convert(nums,left,mid-1)
+        root.right=self.convert(nums,mid+1,right)
+        return root
 ## 167. Two Sum II - Input array is sorted</br>
 > Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number.</br>The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2.</b>Note:</br>Your returned answers (both index1 and index2) are not zero-based.</br>You may assume that each input would have exactly one solution and you may not use the same element twice.</br>
 >> Example:
