@@ -720,6 +720,7 @@ return its bottom-up level order traversal as:
             #先遍历左边再插入再遍历右边这样保证输入顺序
        
 ## 108. Convert Sorted Array to Binary Search Tree `数组变二叉查找树`
+
 > Given an array where elements are sorted in ascending order, convert it to a height balanced BST.
 
 For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1.
@@ -733,23 +734,10 @@ One possible answer is: [0,-3,9,-10,null,5], which represents the following heig
    -3   9
    /   /
  -10  5
- 
-## 108. Convert Sorted Array to Binary Search Tree
-> Given an array where elements are sorted in ascending order, convert it to a height balanced BST.
-
-For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1.
->> Example:
-
-Given the sorted array: [-10,-3,0,5,9],
-
-One possible answer is: [0,-3,9,-10,null,5], which represents the following height balanced BST:
-      0
-     / \
-   -3   9
-   /   /
- -10  5
+       
        ###从中间切开，从右往左，
-       def sortedArrayToBST(self, nums):
+         
+         def sortedArrayToBST(self, nums):
         """
         :type nums: List[int]
         :rtype: TreeNode
