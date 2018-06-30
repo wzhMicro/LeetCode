@@ -752,6 +752,104 @@ One possible answer is: [0,-3,9,-10,null,5], which represents the following heig
         root.left= self.convert(nums,left,mid-1)
         root.right=self.convert(nums,mid+1,right)
         return root
+## 110. Balanced Binary Tree `题目意思是给定一颗树，判断是否高度平衡，即左右子树的高度差不超过1`
+> Given a binary tree, determine if it is height-balanced.
+
+For this problem, a height-balanced binary tree is defined as:
+
+a binary tree in which the depth of the two subtrees of every node never differ by more than 1.
+
+>>Example 1:
+
+Given the following tree [3,9,20,null,null,15,7]:
+
+
+    3
+    
+   / \
+   
+  9  20
+  
+    /  \
+    
+   15   7
+Return true.
+
+Example 2:
+
+Given the following tree [1,2,2,3,3,null,null,4,4]:
+      
+       1
+      / \
+     2   2
+    / \
+   3   3
+  / \
+ 4   4
+Return false.
+###根据定义，递归地判断
+       
+        def isBalanced(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        
+        return self.test(root)!=-1 ##if==-1False.else true
+    
+    def test(self,node):
+        if not node:
+            return 0
+        
+        lh=self.test(node.left)
+        rh=self.test(node.right)
+        if lh==-1 or rh==-1:
+            return -1
+        if abs(lh-rh)>1:
+            return -1
+        
+        return 1+max(lh,rh)
+        
+###节点为空 树高度为零  否则树的高度为左子树的高度和右子树的高度中最大的那个加一，加一的意思就是加上自身这个节点的高度
+
+判断左子树和右子树高度是否相差大于一  如果大于一 返回一个标记数  可以用-1标记
+
+## 111. Minimum Depth of Binary Tree `找最小深度`
+> Given a binary tree, find its minimum depth.
+
+The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node.
+
+Note: A leaf is a node with no children.
+>> Example:
+
+Given binary tree [3,9,20,null,null,15,7],
+    3
+    
+   / \
+   
+  9  20
+  
+    /  \
+    
+   15   7
+   
+return its minimum depth = 2.
+
+        def minDepth(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        return self.min(root)
+    
+    def min(self,node):
+        if not node:
+            return 0
+        lh=self.min(node.left)
+        rh=self.min(node.right)
+        if not lh or not rh:
+            return 1+lh+rh #2.运行至子树为空，返回最终值，加1为根节点的高度
+        return min(lh,rh)+1 #1.将左右子树小的加1返回minhanshu，大的不管-->2
 ## 167. Two Sum II - Input array is sorted</br>
 > Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number.</br>The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2.</b>Note:</br>Your returned answers (both index1 and index2) are not zero-based.</br>You may assume that each input would have exactly one solution and you may not use the same element twice.</br>
 >> Example:
