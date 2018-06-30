@@ -850,6 +850,92 @@ return its minimum depth = 2.
         if not lh or not rh:
             return 1+lh+rh #2.运行至子树为空，返回最终值，加1为根节点的高度
         return min(lh,rh)+1 #1.将左右子树小的加1返回minhanshu，大的不管-->2
+        
+## 112. Path Sum `路径之和等于sum返回TRUE`
+> Given a binary tree and a sum, determine if the tree has a root-to-leaf path such that adding up all the values along the path equals the given sum.
+
+Note: A leaf is a node with no children.
+>> Example:
+
+Given the below binary tree and sum = 22,
+
+      5
+     / \
+    4   8
+   /   / \
+  11  13  4
+ /  \      \
+7    2      1
+return true, as there exist a root-to-leaf path 5->4->11->2 which sum is 22.
+
+       def hasPathSum(self, root, sum):
+        """
+        :type root: TreeNode
+        :type sum: int
+        :rtype: bool
+        """
+        if not root:
+            return False
+        
+        sum -= root.val
+        if sum==0 and not root.left and not root.right:
+            return True
+        return self.hasPathSum(root.left,sum) or self.hasPathSum(root.right,sum)
+### 自己的思想是在通过加法得到。实际用减法更好，当自减到0并且没有子树时返回真。
+
+## 118. Pascal's Triangle `生成杨辉三角形`
+> Given a non-negative integer numRows, generate the first numRows of Pascal's triangle.
+
+
+In Pascal's triangle, each number is the sum of the two numbers directly above it.
+>> Example:
+
+Input: 5
+Output:
+[
+     [1],
+    [1,1],
+   [1,2,1],
+  [1,3,3,1],
+ [1,4,6,4,1]
+]
+       
+       def generate(self, numRows):
+        """
+        :type numRows: int
+        :rtype: List[List[int]]
+        """
+        if numRows==0:
+            return []
+        str=[[1]]
+        for i in range(1,numRows):
+            str.append([1]) #向str数组中插入【1】
+           for j,k in zip(str[-2][:-1],str[-2][1:]):#J,K分别为str中倒数第二个数组中的最后一个起和第【1】个起（不是第‘0’个，因为numRows=2时，不存在，保证第二个数组是【1，1】）
+                str[-1].append(j+k) #向最后一个数组中插入J+K
+            str[-1].append(1) #最后一个数组再加一个1
+        return str
+        
+## 119. Pascal's Triangle II `杨辉三角形(只生成需要的那一行)`
+> Given a non-negative index k where k ≤ 33, return the kth index row of the Pascal's triangle.
+
+Note that the row index starts from 0.
+>> Example:
+
+Input: 3
+Output: [1,3,3,1]
+
+        def getRow(self, rowIndex):
+        """
+        :type rowIndex: int
+        :rtype: List[int]
+        """
+        if rowIndex==0:
+            return [1]
+        
+        str=[1]
+        for i in range(rowIndex):
+            str=[1]+[x+y for x,y in zip(str[:],str[1:])]+[1] #'+'的拼接作用了解一下
+        return str
 ## 167. Two Sum II - Input array is sorted</br>
 > Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number.</br>The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2.</b>Note:</br>Your returned answers (both index1 and index2) are not zero-based.</br>You may assume that each input would have exactly one solution and you may not use the same element twice.</br>
 >> Example:
