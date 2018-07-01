@@ -1059,7 +1059,23 @@ Output: 4
        for i in nums:
             result^=i
        return result
- 
+
+## 141. Linked List Cycle
+> Given a linked list, determine if it has a cycle in it.
+       
+       def hasCycle(self, head):
+        """
+        :type head: ListNode
+        :rtype: bool
+        """
+        fast,slow=head,head
+        while fast and fase.next:
+            if fast==slow:
+                return True
+            slow=slow.next
+            fast=fast.next.next
+        return False
+ ### 设置一慢一快两个指针，当快的追上慢的，存在循环       
 ## 167. Two Sum II - Input array is sorted</br>
 > Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number.</br>The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2.</b>Note:</br>Your returned answers (both index1 and index2) are not zero-based.</br>You may assume that each input would have exactly one solution and you may not use the same element twice.</br>
 >> Example:
