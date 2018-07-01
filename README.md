@@ -936,6 +936,89 @@ Output: [1,3,3,1]
         for i in range(rowIndex):
             str=[1]+[x+y for x,y in zip(str[:],str[1:])]+[1] #'+'的拼接作用了解一下
         return str
+## 121. Best Time to Buy and Sell Stock
+> Say you have an array for which the ith element is the price of a given stock on day i.
+
+If you were only permitted to complete at most one transaction (i.e., buy one and sell one share of the stock), design an algorithm to find the maximum profit.
+
+Note that you cannot sell a stock before you buy one.
+>> Example 1:
+
+Input: [7,1,5,3,6,4]
+Output: 5
+Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
+             Not 7-1 = 6, as selling price needs to be larger than buying price.
+Example 2:
+
+Input: [7,6,4,3,1]
+Output: 0
+Explanation: In this case, no transaction is done, i.e. max profit = 0.
+
+       profit=0
+       buy=float('inf')
+       for i in prices:
+              if i>buy:
+                     profit= max(profit,i-buy)
+              else:
+                     buy=i
+       return profit
+## 122. Best Time to Buy and Sell Stock II
+> Say you have an array for which the ith element is the price of a given stock on day i.
+
+Design an algorithm to find the maximum profit. You may complete as many transactions as you like (i.e., buy one and sell one share of the stock multiple times).
+
+Note: You may not engage in multiple transactions at the same time (i.e., you must sell the stock before you buy again).
+>> Example 1:
+
+Input: [7,1,5,3,6,4]
+Output: 7
+Explanation: Buy on day 2 (price = 1) and sell on day 3 (price = 5), profit = 5-1 = 4.
+             Then buy on day 4 (price = 3) and sell on day 5 (price = 6), profit = 6-3 = 3.
+Example 2:
+
+Input: [1,2,3,4,5]
+Output: 4
+Explanation: Buy on day 1 (price = 1) and sell on day 5 (price = 5), profit = 5-1 = 4.
+             Note that you cannot buy on day 1, buy on day 2 and sell them later, as you are
+             engaging multiple transactions at the same time. You must sell before buying again.
+Example 3:
+
+Input: [7,6,4,3,1]
+Output: 0
+Explanation: In this case, no transaction is done, i.e. max profit = 0.
+
+       return sum([max(prices[i]-prices[i-1],0) for i in range(1,len(prices))])
+       
+   ###solution 2
+        
+        profit=0
+        if not prices:
+            return 0
+        lastp=prices[0]
+        for i in prices:
+            if lastp<i:
+                profit+=i-lastp
+            lastp=i
+        return profit
+       
+## 125. Valid Palindrome `有效回文`
+> Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
+
+Note: For the purpose of this problem, we define empty string as valid palindrome.
+>> Example 1:
+
+Input: "A man, a plan, a canal: Panama"
+Output: true
+Example 2:
+
+Input: "race a car"
+Output: false
+###意思是只保留数字和字母，忽略符号，剩下的为回文字符串</br>
+思路分为2步：1.大小写统一。2.过滤符号。放入list  !isalnum()方法检测字符串是否由字母和数字组成。
+
+        clean=[i for i in s.lower() if i.isalnum()]
+        t=clean[::-1]
+        return clean==t
 ## 167. Two Sum II - Input array is sorted</br>
 > Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number.</br>The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2.</b>Note:</br>Your returned answers (both index1 and index2) are not zero-based.</br>You may assume that each input would have exactly one solution and you may not use the same element twice.</br>
 >> Example:
