@@ -1068,12 +1068,12 @@ Output: 4
         :type head: ListNode
         :rtype: bool
         """
-        fast,slow=head,head
-        while fast and fase.next:
-            if fast==slow:
-                return True
+        fast=slow=head
+        while fast and fast.next:
             slow=slow.next
             fast=fast.next.next
+            if fast is slow: ##is faster than==
+                return True            
         return False
  ### 设置一慢一快两个指针，当快的追上慢的，存在循环       
 ## 167. Two Sum II - Input array is sorted</br>
