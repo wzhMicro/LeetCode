@@ -1019,6 +1019,47 @@ Output: false
         clean=[i for i in s.lower() if i.isalnum()]
         t=clean[::-1]
         return clean==t
+        
+## 136.Single Number
+> Given a non-empty array of integers, every element appears twice except for one. Find that single one.
+
+Note:
+
+Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?
+>> Example 1:
+
+Input: [2,2,1]
+Output: 1
+Example 2:
+
+Input: [4,1,2,1,2]
+Output: 4
+
+###我的方法，比较笨，比较慢。排序后前后都不同的就是那个数
+
+       def singleNumber(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        nums.sort()
+        if len(nums)==1:
+            return nums[0]
+        for i in range(0,len(nums)-1):
+            if i!=0 and i!=len(nums)-1 and nums[i-1]!=nums[i] and nums[i]!=nums[i+1]:
+                return nums[i]
+            elif nums[0]!=nums[1]:
+                return nums[0]
+            elif nums[-1]!=nums[-2]:
+                return nums[-1]
+ ### 第二种方法：利用位操作。位操作的异或（^)，他的其中一个属性是，n^n = 0, 0^n = n。只要将所有的数都进行异或就得到出现一次的数。
+       if len(nums)==1:
+              return nums[0]
+       result=0
+       for i in nums:
+            result^=i
+       return result
+ 
 ## 167. Two Sum II - Input array is sorted</br>
 > Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number.</br>The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2.</b>Note:</br>Your returned answers (both index1 and index2) are not zero-based.</br>You may assume that each input would have exactly one solution and you may not use the same element twice.</br>
 >> Example:
