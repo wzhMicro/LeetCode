@@ -1176,7 +1176,60 @@ Your code should preferably run in O(n) time and use only O(1) memory.
             B=headA if not B else B.next
         return A
 
+## 168. Excel Sheet Column Title
+> Given a positive integer, return its corresponding column title as appear in an Excel sheet.
+>>  For example:
 
+    1 -> A
+    2 -> B
+    3 -> C
+    ...
+    26 -> Z
+    27 -> AA
+    28 -> AB 
+    ...
+Example 1:
+
+Input: 1
+Output: "A"
+Example 2:
+
+Input: 28
+Output: "AB"
+Example 3:
+
+Input: 701
+Output: "ZY"
+
+       def convertToTitle(self, n):
+        """
+        :type n: int
+        :rtype: str
+        """
+        res=''
+        while n>0:
+            n,rem=divmod(n-1,26)
+            res+=chr(ord('A')+rem)
+        res2=res[::-1]
+        return res2
+
+## 169. Majority Element
+> Given an array of size n, find the majority element. The majority element is the element that appears more than ⌊ n/2 ⌋ times.
+
+You may assume that the array is non-empty and the majority element always exist in the array.
+>> Example 1:
+
+Input: [3,2,3]
+Output: 3
+Example 2:
+
+Input: [2,2,1,1,1,2,2]
+Output: 2
+
+###这个题非常有意思。因为这个数字出现的次数最少为n/2次。所以有一半以上是这个数字。将数组排序后中间那个数一定是这个数
+
+       nums.sort()
+       return nums[len(nums)//2]
 
 ## 167. Two Sum II - Input array is sorted</br>
 > Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number.</br>The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2.</b>Note:</br>Your returned answers (both index1 and index2) are not zero-based.</br>You may assume that each input would have exactly one solution and you may not use the same element twice.</br>
