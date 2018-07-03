@@ -1075,7 +1075,109 @@ Output: 4
             if fast is slow: ##is faster than==
                 return True            
         return False
- ### 设置一慢一快两个指针，当快的追上慢的，存在循环       
+ ### 设置一慢一快两个指针，当快的追上慢的，存在循环   
+## 155. Min Stack
+> Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.
+
+push(x) -- Push element x onto stack.
+pop() -- Removes the element on top of the stack.
+top() -- Get the top element.
+getMin() -- Retrieve the minimum element in the stack.
+>> Example:
+MinStack minStack = new MinStack();
+minStack.push(-2);
+minStack.push(0);
+minStack.push(-3);
+minStack.getMin();   --> Returns -3.
+minStack.pop();
+minStack.top();      --> Returns 0.
+minStack.getMin();   --> Returns -2.
+
+
+        def __init__(self):
+        """
+        initialize your data structure here.
+        """
+        self.stack=[]  #正常栈
+        self.min=[]         #只放最小值
+              
+    def push(self, x):
+        """
+        :type x: int
+        :rtype: void
+        """
+        self.stack.append(x)       #正常操作入栈
+        if not self.min or x<=self.min[-1]:      #如果比之前小或等于，放入MIN 栈中
+            self.min.append(x)
+    def pop(self):
+        """
+        :rtype: void
+        """
+        x=self.stack.pop()  #出
+        if x==self.min[-1]:
+            self.min.pop()  #如果正常栈出了，最小值栈也出去
+
+    def top(self):
+        """
+        :rtype: int
+        """
+        return self.stack[-1]      #返回最后一项
+
+    def getMin(self):
+        """
+        :rtype: int
+        """
+        if not self.min:
+            return None
+        return self.min[-1]        #返回最小值的最后一项
+##  157. Read N Characters Given Read4
+> The API: int read4(char *buf) reads 4 characters at a time from a file.
+
+The return value is the actual number of characters read. For example, it returns 3 if there is only 3 characters left in the file.
+
+By using the read4 API, implement the function int read(char *buf, int n) that reads n characters from the file.
+
+Note:
+The read function will only be called once for each test case.
+>> 每次可以从一个文件中最多读出4个字符，如果文件中的字符不足4个字符时，返回准确的当前剩余的字符数。
+              
+              def read(self,buff,n):
+                     total_chars,last,chars=0,1
+                     while last_chars ==4 and total_chars<n:
+                            buf4=[""]*4
+                            last_chars=min(read4(buf4),n-total_chars)
+                            buf[total:total_chars+last_chars]=buf4
+                            total_chars+=last_chars
+                     return total_chars
+## 160. Intersection of Two Linked Lists
+> Write a program to find the node at which the intersection of two singly linked lists begins.
+>> For example, the following two linked lists:
+
+A:          a1 → a2
+                   ↘
+                     c1 → c2 → c3
+                   ↗            
+B:     b1 → b2 → b3
+begin to intersect at node c1.
+
+Notes:
+
+If the two linked lists have no intersection at all, return null.
+The linked lists must retain their original structure after the function returns.
+You may assume there are no cycles anywhere in the entire linked structure.
+Your code should preferably run in O(n) time and use only O(1) memory.
+
+        if not headA or not headB:
+            return None
+        A,B=headA,headB
+        
+        while A is not B:
+            A=headB if not A else A.next
+            B=headA if not B else B.next
+        return A
+
+
+
 ## 167. Two Sum II - Input array is sorted</br>
 > Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number.</br>The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2.</b>Note:</br>Your returned answers (both index1 and index2) are not zero-based.</br>You may assume that each input would have exactly one solution and you may not use the same element twice.</br>
 >> Example:
