@@ -1295,6 +1295,26 @@ Output: 701
             else:
                 sum+=ord(s[i])-64
         return sum
+        
+ ## 172. Factorial Trailing Zeroes
+ > Given an integer n, return the number of trailing zeroes in n!.
+ >> Example 1:
+
+Input: 3
+Output: 0
+Explanation: 3! = 6, no trailing zero.
+Example 2:
+
+Input: 5
+Output: 1
+Explanation: 5! = 120, one trailing zero.
+###实际是返回2*5的个数，由于含有2的因数个数多于5，所以只有选取有5的。但是25=5*5，所有有两个5.所以不仅计算n/5个数，还要n/5/5,n/5/5/5.......
+       count=0
+       i=1
+       while n//5**i>0:
+              count+=n//5**i
+              i+=1
+       return count
 ## 167. Two Sum II - Input array is sorted</br>
 > Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number.</br>The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2.</b>Note:</br>Your returned answers (both index1 and index2) are not zero-based.</br>You may assume that each input would have exactly one solution and you may not use the same element twice.</br>
 >> Example:
