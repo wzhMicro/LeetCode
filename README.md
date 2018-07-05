@@ -1315,6 +1315,127 @@ Explanation: 5! = 120, one trailing zero.
               count+=n//5**i
               i+=1
        return count
+       
+## 189. Rotate Array
+> Given an array, rotate the array to the right by k steps, where k is non-negative.
+>> Example 1:
+
+Input: [1,2,3,4,5,6,7] and k = 3
+Output: [5,6,7,1,2,3,4]
+Explanation:
+rotate 1 steps to the right: [7,1,2,3,4,5,6]
+rotate 2 steps to the right: [6,7,1,2,3,4,5]
+rotate 3 steps to the right: [5,6,7,1,2,3,4]
+Example 2:
+
+Input: [-1,-100,3,99] and k = 2
+Output: [3,99,-1,-100]
+Explanation: 
+rotate 1 steps to the right: [99,-1,-100,3]
+rotate 2 steps to the right: [3,99,-1,-100]
+       
+       n=len(nums)
+       k%=n
+       nums[:]=nums[n-k:]+nums[:n-k]
+       
+## 190. Reverse Bits
+> Reverse bits of a given 32 bits unsigned integer.
+>> Example:
+
+Input: 43261596
+Output: 964176192
+Explanation: 43261596 represented in binary as 00000010100101000001111010011100, 
+             return 964176192 represented in binary as 00111001011110000010100101000000.
+             
+              num=bin(n)[:1:-1]
+              return int(num+'0'*(32-len(num)),2)
+              
+## 191. Number of 1 Bits  `二进制中1的个数`
+> Write a function that takes an unsigned integer and returns the number of '1' bits it has (also known as the Hamming weight).
+>> Input: 11
+Output: 3
+Explanation: Integer 11 has binary representation 00000000000000000000000000001011 
+Example 2:
+
+Input: 128
+Output: 1
+Explanation: Integer 128 has binary representation 00000000000000000000000010000000
+
+
+### 多种做法
+1.            
+              
+                     return bin(n).count('1')
+2.
+                     
+                     num=bin(n)[2:]
+                     count=0
+                     for i in num:
+                            if i=='1':
+                                   count+=1
+                      return count
+3. 
+### n&n-1非常重要
+将二进制最低位1换为0.更换次数即为结果
+                     
+                     count=0
+                     whilr n>0:
+                            count+=1
+                            n&n-1
+                     return count
+                     
+## 198. House Robber
+> You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security system connected and it will automatically contact the police if two adjacent houses were broken into on the same night.
+
+Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police.
+>> Example 1:
+
+Input: [1,2,3,1]
+Output: 4
+Explanation: Rob house 1 (money = 1) and then rob house 3 (money = 3).
+             Total amount you can rob = 1 + 3 = 4.
+Example 2:
+
+Input: [2,7,9,3,1]
+Output: 12
+Explanation: Rob house 1 (money = 2), rob house 3 (money = 9) and rob house 5 (money = 1).
+             Total amount you can rob = 2 + 9 + 1 = 12.
+### 假设有n家，那么你要判断“偷第n家不偷第n-1家且前n-2家尽量多的偷”和“不偷第n家且前n-1家尽量多的偷”，哪个得到的钱多偷哪个。 
+       def rob(self, nums):
+              """
+        :type nums: List[int]
+        :rtype: int
+        """
+        
+              n=len(nums)
+              if n==0:
+                     return 0
+              if n==1:
+                     return nums[0]
+              if n==2:
+                     return max(nums[0],nums[1])
+               
+              money =[0]*n #total money
+              money[0]=nums[0]
+              money[1]=max(nums[0],nums[1])
+              for i in range(2,n):
+                     money[i]=max(money[i-2]+nums[i],money[i])
+              return money[n-1]
+              
+## 202. Happy Number  
+> Write an algorithm to determine if a number is "happy".
+
+A happy number is a number defined by the following process: Starting with any positive integer, replace the number by the sum of the squares of its digits, and repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1. Those numbers for which this process ends in 1 are happy numbers.
+
+>> Example: 
+
+Input: 19
+Output: true
+Explanation: 
+12 + 92 = 82
+82 + 22 = 68
+62 + 82 = 100
+12 + 02 + 02 = 1
 ## 167. Two Sum II - Input array is sorted</br>
 > Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number.</br>The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2.</b>Note:</br>Your returned answers (both index1 and index2) are not zero-based.</br>You may assume that each input would have exactly one solution and you may not use the same element twice.</br>
 >> Example:
@@ -1343,3 +1464,4 @@ Explanation: The sum of 2 and 7 is 9. Therefore index1 = 1, index2 = 2.</br>
 
 
 ### Note:</br>设置前后两个哨兵
+
