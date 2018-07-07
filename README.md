@@ -1436,6 +1436,140 @@ Explanation:
 82 + 22 = 68
 62 + 82 = 100
 12 + 02 + 02 = 1
+
+       dic={}
+       while True:
+              dic[n]=True
+              sum=0
+              while n:
+                     sum+=(n%10)**2
+                     n//10
+              if sum==1:
+                     return True
+              elif sum in dic:
+                     return False
+              else:
+                     n=sum
+           
+           
+  ###第二种不太明白
+              while true:
+                     if n==1:
+                            return True
+                     if n==4:
+                            return False
+                     n=sum([int(c)**2  for c in str(n)])
+
+## 203. Remove Linked List Elements
+> Remove all elements from a linked list of integers that have value val.
+>> Example:
+
+Input:  1->2->6->3->4->5->6, val = 6
+Output: 1->2->3->4->5
+
+      class ListNode:
+       #     def __init__(self, x):
+       #         self.val = x
+       #         self.next = None
+
+       class Solution:
+              def removeElements(self, head, val):
+        """
+        :type head: ListNode
+        :type val: int
+        :rtype: ListNode
+        """
+                     pre=now=ListNode(0)
+                     pre.next=head
+                     while head:
+                            if head.val==val:
+                                   pre.next=head.next
+                            else:
+                                   pre=pre.next
+                            head=head.next
+                     return now.next
+## 204. Count Primes
+> Count the number of prime numbers less than a non-negative number, n.
+>> Example:
+
+Input: 10
+Output: 4
+Explanation: There are 4 prime numbers less than 10, they are 2, 3, 5, 7.
+       
+       if n<3:
+              return 0
+       str=[1]*n
+       str[0]=str[1]=0
+       for i in range(2,int(n**0.5)):
+              if str[i]==1:
+                     str[i**2:n:i]=[0]*len(str[i**2:n:i])
+        return sum(str)
+## 205. Isomorphic Strings
+> Given two strings s and t, determine if they are isomorphic.
+
+Two strings are isomorphic if the characters in s can be replaced to get t.
+
+All occurrences of a character must be replaced with another character while preserving the order of characters. No two characters may map to the same character but a character may map to itself.
+>> Example 1:
+
+Input: s = "egg", t = "add"
+Output: true
+Example 2:
+
+Input: s = "foo", t = "bar"
+Output: false
+Example 3:
+
+Input: s = "paper", t = "title"
+Output: true
+
+       hashmap={}
+       mapval={}
+       for i in range(len(s)):
+              if s[i] in hashmap:
+                     if hashmap[s[i]]!=t[i]:
+                            return False
+              elif t[i] in mapval:
+                     return False
+                     
+              else:
+                     hashmap[s[i]]=t[i]
+                     mapval[t[i]]=True
+        return True
+## 206. Reverse Linked List
+> Reverse a singly linked list.
+
+Example:
+
+Input: 1->2->3->4->5->NULL
+Output: 5->4->3->2->1->NULL
+Follow up:
+
+A linked list can be reversed either iteratively or recursively. Could you implement both?
+
+
+       prev=None
+       curr=head
+       while curr!=None:
+              temp=curr.next
+              curr.next=prev
+              prev= curr
+              curr=temp
+       return prev
+       
+  ### 压栈再出个弹出
+  
+       curr=head
+       new=[]
+       while curr:
+              new.insert(0,curr.val)
+              curr=curr.next
+       
+       p=head
+       for i in new:
+              p.val=i
+              p=p.next
+       return head
 ## 167. Two Sum II - Input array is sorted</br>
 > Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number.</br>The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2.</b>Note:</br>Your returned answers (both index1 and index2) are not zero-based.</br>You may assume that each input would have exactly one solution and you may not use the same element twice.</br>
 >> Example:
