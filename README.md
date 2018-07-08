@@ -1213,6 +1213,34 @@ Output: "ZY"
         res2=res[::-1]
         return res2
 
+## 167. Two Sum II - Input array is sorted</br>
+> Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number.</br>The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2.</b>Note:</br>Your returned answers (both index1 and index2) are not zero-based.</br>You may assume that each input would have exactly one solution and you may not use the same element twice.</br>
+>> Example:
+Input: numbers = [2,7,11,15], target = 9</br>
+Output: [1,2]</br>
+Explanation: The sum of 2 and 7 is 9. Therefore index1 = 1, index2 = 2.</br>
+              
+    class Solution:
+    def twoSum(self, numbers, target):
+        """
+        :type numbers: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        i = 0
+        j = len(numbers)-1
+        while True:
+            psum = numbers[i] + numbers[j]
+            if psum == target:
+                return [i+1, j+1]
+            elif psum > target:
+                j -= 1
+            else:
+                i += 1
+        return None
+
+
+### Note:</br>设置前后两个哨兵
 ## 169. Majority Element
 > Given an array of size n, find the majority element. The majority element is the element that appears more than ⌊ n/2 ⌋ times.
 
@@ -1570,32 +1598,71 @@ A linked list can be reversed either iteratively or recursively. Could you imple
               p.val=i
               p=p.next
        return head
-## 167. Two Sum II - Input array is sorted</br>
-> Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number.</br>The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2.</b>Note:</br>Your returned answers (both index1 and index2) are not zero-based.</br>You may assume that each input would have exactly one solution and you may not use the same element twice.</br>
->> Example:
-Input: numbers = [2,7,11,15], target = 9</br>
-Output: [1,2]</br>
-Explanation: The sum of 2 and 7 is 9. Therefore index1 = 1, index2 = 2.</br>
+
+## 217. Contains Duplicate
+> Given an array of integers, find if the array contains any duplicates.
+
+Your function should return true if any value appears at least twice in the array, and it should return false if every element is distinct.
+>> Example 1:
+
+Input: [1,2,3,1]
+Output: true
+Example 2:
+
+Input: [1,2,3,4]
+Output: false
+Example 3:
+
+Input: [1,1,1,3,3,4,3,2,4,2]
+Output: true
+
+
+###第一种，排序后有没有相邻一样的
+
+       def containsDuplicate(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+        """
+        nums.sort()
+        for i in range(0,len(nums)-1):
+            if nums[i]==nums[i+1]:
+                return True
+        return False
+### 第二种，没有重复的数组相当于集合，利用Python的set，将数组转换成集合，若长度与原来相等则说明没有重复。
+
               
-    class Solution:
-    def twoSum(self, numbers, target):
-        """
-        :type numbers: List[int]
-        :type target: int
-        :rtype: List[int]
-        """
-        i = 0
-        j = len(numbers)-1
-        while True:
-            psum = numbers[i] + numbers[j]
-            if psum == target:
-                return [i+1, j+1]
-            elif psum > target:
-                j -= 1
-            else:
-                i += 1
-        return None
+              return len(nums)!=len(set(nums))
+### 第三种，利用字典记录
 
+       dic={}
+        for i in nums:
+            if i in dic:
+                return True
+            dic[i]=True
+        return False
+ 
+## 219. Contains Duplicate II
+> Given an array of integers and an integer k, find out whether there are two distinct indices i and j in the array such that nums[i] = nums[j] and the absolute difference between i and j is at most k.
+>> Example 1:
 
-### Note:</br>设置前后两个哨兵
+Input: nums = [1,2,3,1], k = 3
+Output: true
+Example 2:
 
+Input: nums = [1,0,1,1], k = 1
+Output: true
+Example 3:
+
+Input: nums = [1,2,3,1,2,3], k = 2
+Output: false
+
+       dic={}
+       for i in range(len(nums)):
+              if nums[i] in dic and i-dic[nums[i]]<=k:
+                     return True
+              else:
+                     dic[nums[i]]=i
+       return False
+       
+   ### 第二种用enumerate（）
