@@ -1666,3 +1666,27 @@ Output: false
        return False
        
    ### 第二种用enumerate（）
+## 226. Invert Binary Tree
+> Example:
+
+Input:
+
+     4
+   /   \
+  2     7
+ / \   / \
+1   3 6   9
+Output:
+
+     4
+   /   \
+  7     2
+ / \   / \
+9   6 3   1
+       
+       def tree(self,root):
+              if root:
+                     left=self.tree(root.left)
+                     right=self.tree(root.right)
+                     root.left,root.right= right,left
+              return root
