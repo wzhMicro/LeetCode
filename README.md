@@ -1690,3 +1690,11 @@ Output:
                      right=self.tree(root.right)
                      root.left,root.right= right,left
               return root
+
+## 231 power of two `2次幂`
+       
+    简单的题：n&n-1
+       
+              if n>0:
+                     return n&(n-1)==0
+              return False
