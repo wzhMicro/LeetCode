@@ -1737,3 +1737,53 @@ Output:
               if n>0:
                      return n&(n-1)==0
               return False
+## 232. Implement Queue using Stacks
+> Example:
+
+MyQueue queue = new MyQueue();
+
+queue.push(1);
+queue.push(2);  
+queue.peek();  // returns 1
+queue.pop();   // returns 1
+queue.empty(); // returns false
+
+              def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.instack,self.outstack=[],[]
+
+    def push(self, x):
+        """
+        Push element x to the back of queue.
+        :type x: int
+        :rtype: void
+        """
+        self.instack.append(x)
+
+    def pop(self):
+        """
+        Removes the element from in front of queue and returns that element.
+        :rtype: int
+        """
+        if not self.outstack:
+            while self.instack:
+                self.outstack.append(self.instack.pop())
+        return self.outstack.pop()
+
+    def peek(self):
+        """
+        Get the front element.
+        :rtype: int
+        """
+        if not self.outstack:
+            while self.instack:
+                self.outstack.append(self.instack.pop())
+        return self.outstack[-1]
+    def empty(self):
+        """
+        Returns whether the queue is empty.
+        :rtype: bool
+        """
+        return not self.instack and not self.outstack
