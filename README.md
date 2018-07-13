@@ -1787,3 +1787,35 @@ queue.empty(); // returns false
         :rtype: bool
         """
         return not self.instack and not self.outstack
+
+## 234. Palindrome Linked List
+> Given a singly linked list, determine if it is a palindrome.
+>> Example 1:
+
+Input: 1->2
+Output: false
+Example 2:
+
+Input: 1->2->2->1
+Output: true
+
+       if not head or not head.next:
+            return True
+        
+        new=[]
+        
+        fast=slow=head
+        while fast and fast.next:
+            new.insert(0,slow.val)
+            fast= fast.next.next
+            slow=slow.next
+            
+        if fast:
+            slow=slow.next
+            
+        for i in new:
+            if i!=slow.val:
+                return False
+            slow=slow.next
+        return True
+       
