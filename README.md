@@ -1858,3 +1858,35 @@ Explanation: The LCA of nodes 2 and 4 is 2, since a node can be a descendant of 
         if p.val<root.val and q.val<root.val:
               return lowestCommonAncestor(root.left, p, q)
          return root
+## 257. Binary Tree Paths
+> Example:
+
+Input:
+
+   1
+ /   \
+2     3
+ \
+  5
+
+Output: ["1->2->5", "1->3"]
+
+Explanation: All root-to-leaf paths are: 1->2->5, 1->3
+
+         def binaryTreePaths(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[str]
+        """
+        b=[]
+        if not root:
+            return b
+        if not root.left and not root.right:
+            b.append(str(root.val))
+            return b
+        for i in self.binaryTreePaths(root.left):
+            b.append(str(root.val)+'->'+i)
+        for j in self.binaryTreePaths(root.right):
+            b.append(str(root.val)+'->'+j)
+        
+        return b
