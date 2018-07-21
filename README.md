@@ -1890,3 +1890,14 @@ Explanation: All root-to-leaf paths are: 1->2->5, 1->3
             b.append(str(root.val)+'->'+j)
         
         return b
+## 258. Add Digits `数根`
+> Example:
+
+Input: 38
+Output: 2 
+Explanation: The process is like: 3 + 8 = 11, 1 + 1 = 2. 
+             Since 2 has only one digit, return it.
+             
+         if num<10:
+              return num
+         return (num-1)%9+1
