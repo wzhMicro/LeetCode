@@ -1932,3 +1932,39 @@ Explanation: 14 is not ugly since it includes another prime factor 7.
             num//=5
         
         return num==1
+
+## 268. Missing Number
+> Example 1:
+
+Input: [3,0,1]
+Output: 2
+Example 2:
+
+Input: [9,6,4,2,3,5,7,0,1]
+Output: 8
+
+`第一种是高斯定理，容易理解`
+      
+      def missingNumber(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        result=len(nums)*(len(nums)+1)//2
+        fact=sum(nums)
+        return result-fact
+        
+        
+ `第二种是排序后看缺了哪一个`
+ 
+       def missingNumber(self,nums):
+              if nums[-1]!=len(nums):
+                     return len(nums)
+              elif nums[0]!=0:
+                     return 0
+              
+              for i in rang(1,len(nums)):
+                     mis=nums[i-1]+1
+                     if nums[i]!=mis:
+                            return mis
+·还有通过异或和Hash完成的·
