@@ -1998,3 +1998,40 @@ Then 4 is the first bad version.
             else:
                 left=mid+1
         return left
+
+## 283. Move Zeroes
+> Given an array nums, write a function to move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+>> Example:
+
+Input: [0,1,0,3,12]
+Output: [1,3,12,0,0]
+
+       def moveZeroes(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: void Do not return anything, modify nums in-place instead.
+        """
+
+        i=0
+        n=len(nums)
+        while i<n:
+            if nums[i]==0:
+                del nums[i]
+                nums.append(0)
+                i-=1
+                n-=1
+            i+=1
+            
+            
+ ###secong solution:
+       
+        def moveZeroes(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: void Do not return anything, modify nums in-place instead.
+        """
+
+        n=nums.count(0)
+        nums[:]=[i for i in nums if i!=0]
+        nums+=[0]*n
+        
